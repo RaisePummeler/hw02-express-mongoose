@@ -1,10 +1,10 @@
-import books from "../../models/books/index.js";
+import Contact from "../../models/contact.js";
 
 import { createError } from "../../helpers/index.js";
 
 const removeById = async (req, res) => {
     const { id } = req.params;
-    const result = await books.removeById(id);
+    const result = await Contact.remove({ _id: id });
     if (!result) {
         throw createError(404, "Not found")
     }

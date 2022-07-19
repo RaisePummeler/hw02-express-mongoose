@@ -6,9 +6,9 @@ import {ctrlWrapper} from "../../helpers/index.js";
 
 const router = express.Router();
 
-// router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/", ctrlWrapper(ctrl.getAll));
 
-// router.get("/:id", ctrlWrapper(ctrl.getById));
+router.get("/:id", ctrlWrapper(ctrl.getById));
 
 router.post("/", ctrlWrapper(ctrl.add));
 

@@ -22,8 +22,25 @@ const contactSchema = Schema({
         required: false,
         default: false
     },
-});
+}, {verstionKey: false, timestamps: true});
 
-const Contact = model("contact", contactSchema);
+const handleErrors = (error, data, next) => {
+    const { name, code } = error;
+    if(name == "MongoServerError" && code == 11000) {
+        error.status = 409;
+    } else {
+        error.status = 400;
+    }
+
+    if(error.message.includes("contact validation failed")) {
+        error.message = "missing required name field";
+    }
+
+    next();
+}
+
+contactSchema.post("save", handleErrors);
+
+const Contact = model("contact", contactSchema, "contacts");
 
 export default Contact;

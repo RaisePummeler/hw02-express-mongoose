@@ -1,10 +1,10 @@
-import books from "../../models/books/index.js";
+import Contact from "../../models/contact.js";
 
 import { createError } from "../../helpers/index.js";
 
 const updateById = async (req, res) => {
     const { id } = req.params;
-    const result = await books.updateById(id, req.body);
+    // const result = await Contact.updateOne(id, req.body);
     if (!result) {
         throw createError(404, "Not found")
     }

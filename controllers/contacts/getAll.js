@@ -1,7 +1,7 @@
-import books from "../../models/books/index.js";
+import Contact from "../../models/contact.js";
 
 const getAll = async (req, res) => {
-    const result = await books.getAll();
+    const result = await Contact.find();
     res.json(result);
 }
 
