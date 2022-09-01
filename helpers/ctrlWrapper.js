@@ -3,7 +3,10 @@ const ctrlWrapper = (ctrl) => {
         try {
             await ctrl(req, res, next)
         } catch (error) {
-            next(error)
+            if(error.message.includes("validation")) {
+                error.status = 400; 
+            }
+            next(error);
         }
     };
 

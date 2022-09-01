@@ -32,7 +32,7 @@ const handleErrors = (error, data, next) => {
         error.status = 400;
     }
 
-    if(error.message.includes("contact validation failed")) {
+    if(error.message.includes("Contact validation failed")) {
         error.message = "missing required name field";
     }
 
@@ -41,6 +41,6 @@ const handleErrors = (error, data, next) => {
 
 contactSchema.post("save", handleErrors);
 
-const Contact = model("contact", contactSchema, "contacts");
+const Contact = model("Contact", contactSchema);
 
 export default Contact;

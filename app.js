@@ -30,7 +30,7 @@ app.use((error, req, res, next)=> {
     })
 })
 
-mongoose.connect(DB_HOST)
+mongoose.connect(DB_HOST, { dbName: "hw02" })
     .then(()=>{
         app.listen(PORT);
         console.log("Server started!")
