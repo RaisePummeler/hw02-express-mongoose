@@ -1,8 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, model, Document, PostMiddlewareFunction } from "mongoose";
+import { RequestError } from "../interfaces";
 
-const { Schema, model } = mongoose;
+export interface IContact extends mongoose.Schema {
+    name: string,
+    email: string,
+    phone: string,
+    favorite: boolean
+}
 
-const contactSchema = Schema({
+const contactSchema: Schema<IContact> = new Schema<IContact>({
     name: {
         type: String,
         required: true
@@ -22,9 +28,9 @@ const contactSchema = Schema({
         required: false,
         default: false
     },
-}, {verstionKey: false, timestamps: true});
+}, {timestamps: true});
 
-const handleErrors = (error, data, next) => {
+const handleErrors = (error: RequestError, data: Document, next: ()=>void) => {
     const { name, code } = error;
     if(name == "MongoServerError" && code == 11000) {
         error.status = 409;
@@ -39,8 +45,9 @@ const handleErrors = (error, data, next) => {
     next();
 }
 
+//@ts-ignore
 contactSchema.post("save", handleErrors);
 
-const Contact = model("Contact", contactSchema);
+const Contact = model<IContact>("Contact", contactSchema);
 
 export default Contact;

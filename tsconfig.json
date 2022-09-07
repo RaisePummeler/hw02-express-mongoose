@@ -1,0 +1,24 @@
+{
+    "ts-node": {
+        "files": true
+    },
+    "files": [
+        "src/app.ts",
+        "src/interfaces.d.ts"
+    ],
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "CommonJS",
+        // "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "./dist",
+
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": ["src/**/*"]
+}

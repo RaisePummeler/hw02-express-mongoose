@@ -1,10 +1,11 @@
-import Contact from "../../models/contact.js";
+import { Request, Response } from "express";
+import Contact, { IContact } from "../../models/contact.js";
 
 import { createError } from "../../helpers/index.js";
 
-const removeById = async (req, res) => {
+const removeById = async (req: Request, res: Response): Promise<void | never> => {
     const { id } = req.params;
-    const result = await Contact.findByIdAndRemove(id);
+    const result: IContact | null = await Contact.findByIdAndRemove(id);
     if(!result) {
         throw createError(404, "Not found")
     } else {
