@@ -1,5 +1,5 @@
 
 export class RequestError extends Error {
-    code: number
-    status: number
+    code?: number
+    status?: number
 }
